@@ -1,0 +1,107 @@
+.main {
+  position: relative;
+  display: flex;
+  z-index: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+.main .sidebar {
+  flex-shrink: 0;
+  width: 260px;
+  overflow: auto;
+  padding: 0.5rem;
+  position: relative;
+  background: #f1f1f1;
+}
+.main .hierarchy {
+  position: relative;
+  overflow: auto;
+  height: 100vh;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.hierarchy .wrapper {
+  width: 100%;
+}
+.formElement {
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+}
+input {
+  width: 100%;
+}
+div::-webkit-scrollbar {
+  display: none;
+}
+
+#settings {
+  position: absolute;
+  z-index: 10;
+  background: #f1f1f1;
+  left: 260px;
+  top: 10px;
+  width: 48px;
+  height: 48px;
+  padding: 0.2rem;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#settings img {
+  width: 100%;
+  height: 100%;
+}
+
+#info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #fff;
+  width: 100vw;
+  height: 100vh;
+  min-height: fit-content;
+  overflow: auto;
+  z-index: 11;
+}
+#info .wrapper {
+  margin: auto;
+  width: 100%;
+  max-width: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#info .wrapper .title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+#info .wrapper .title h1 {
+  font-size: 2rem;
+}
+#info .wrapper .install {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+#info .wrapper .install div {
+  margin-bottom: 1rem;
+}
+#info .wrapper.install h2 {
+  text-align: center;
+}
+p {
+  margin-bottom: 0.5rem;
+}
+
+#info .wrapper .links {
+  text-align: center;
+}
+#info .wrapper .links .link {
+  margin-bottom: 1rem;
+}
+#info .wrapper .links .link span {
+  display: block;
+}

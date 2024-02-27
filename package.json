@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "rc-hierarchy": "^0.0.2",
+    "bootstrap": "^5.3.3",
+    "rc-hierarchy": "^1.0.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
