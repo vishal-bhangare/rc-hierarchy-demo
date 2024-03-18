@@ -10,13 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@codemirror/lang-json": "^6.0.1",
+    "@uiw/react-codemirror": "^4.21.24",
     "bootstrap": "^5.3.3",
+    "js-beautify": "^1.15.1",
     "rc-hierarchy": "^1.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/js-beautify": "^1.14.3",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
