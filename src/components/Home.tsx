@@ -27,7 +27,7 @@ const examples: { [key: string]: any } = {
   Talents: Talents,
   "Animal Kingdom": animalKingdom,
 };
-console.log(typeof Talents);
+
 const fonts = ["Arial", "Courier"];
 function Home() {
   const [config, setConfig] = useState(defaultConfig);
@@ -192,6 +192,23 @@ function Home() {
               />
             </Col>
           </Form.Group>
+          {config.isCompact && (
+            <Form.Group as={Row} controlId="ct" className={styles.formElement}>
+              <Form.Label column sm={7}>
+                ct:
+              </Form.Label>
+              <Col sm={5}>
+                <Form.Control
+                  type="number"
+                  name="ct"
+                  value={config.ct}
+                  onChange={changeConfig}
+                  min={1}
+                  max={5}
+                />
+              </Col>
+            </Form.Group>
+          )}
           <Form.Group
             as={Row}
             controlId="maxWid"
