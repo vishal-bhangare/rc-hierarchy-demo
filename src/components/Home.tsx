@@ -1,7 +1,7 @@
 import { Hierarchy } from "rc-hierarchy";
 import { Talents, animalKingdom } from "../data";
 import { Form, Row, Col, Button } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import settingIcon from "../assets/setting.png";
 import infoIcon from "../assets/info.png";
 import CustomData from "../components/CustomData";
@@ -22,6 +22,7 @@ const defaultConfig = {
   boxPadding: 4,
   boxRadius: 5,
   canvasPadding: 20,
+  canvasBackgroundColor: "#ffffff",
 };
 const examples: { [key: string]: any } = {
   Talents: Talents,
@@ -29,7 +30,17 @@ const examples: { [key: string]: any } = {
   Custom: {},
 };
 
-const fonts = ["Arial", "Courier"];
+const fonts = [
+  "Arial",
+  "Courier",
+  "Courier New",
+  "Verdana",
+  "Tahoma",
+  "Trebuchet MS",
+  "Times New Roman",
+  "Georgia",
+];
+
 function Home() {
   const [config, setConfig] = useState(defaultConfig);
   const [curData, setCurData] = useState("Talents");
@@ -38,9 +49,11 @@ function Home() {
   const [isOpen, setOpen] = useState(true);
   const [isAboutOpen, setAboutOpen] = useState(false);
   const [customDataInput, setCustomDataInput] = useState(false);
+  const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
 
   const toggleAbout = () => setAboutOpen(!isAboutOpen);
   const closeCustomDataInput = () => setCustomDataInput(false);
+
   const changeConfig = (e: any) => {
     if (e.target.name == "isCompact") {
       setConfig((config) => ({
@@ -57,6 +70,19 @@ function Home() {
       }));
     }
   };
+
+  const saveCanvas = (event: any) => {
+    const link = event.currentTarget;
+    link.setAttribute("download", `${curData}.png`);
+    const image = canvas!
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+    link.setAttribute("href", image);
+  };
+
+  useEffect(() => {
+    setCanvas(document.getElementById("canvas") as HTMLCanvasElement);
+  }, []);
 
   return (
     <div className={styles.main}>
@@ -339,7 +365,27 @@ function Home() {
                 onChange={changeConfig}
               />
             </Col>
-          </Form.Group>{" "}
+          </Form.Group>
+          <Form.Group
+            as={Row}
+            controlId="canvasPadding"
+            className={styles.formElement}
+          >
+            <Form.Label column sm={7}>
+              Background Color:
+            </Form.Label>
+            <Col sm={5}>
+              <Form.Control
+                type="color"
+                name="canvasBackgroundColor"
+                value={config.canvasBackgroundColor}
+                onChange={changeConfig}
+              />
+            </Col>
+          </Form.Group>
+          <Button className={styles.saveBtn}>
+            <a onClick={saveCanvas}>Save Canvas</a>
+          </Button>
         </Form>
       </div>
 
