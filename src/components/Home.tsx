@@ -26,13 +26,15 @@ const defaultConfig = {
 const examples: { [key: string]: any } = {
   Talents: Talents,
   "Animal Kingdom": animalKingdom,
+  Custom: {},
 };
 
 const fonts = ["Arial", "Courier"];
 function Home() {
   const [config, setConfig] = useState(defaultConfig);
   const [curData, setCurData] = useState("Talents");
-  const [customData, setCustomData] = useState({});
+  const [customData, setCustomData] = useState(examples[curData]);
+  const [isDataEdited, setDataEdited] = useState(false);
   const [isOpen, setOpen] = useState(true);
   const [isAboutOpen, setAboutOpen] = useState(false);
   const [customDataInput, setCustomDataInput] = useState(false);
@@ -79,19 +81,29 @@ function Home() {
               onChange={(e) => {
                 const value = e.target.value.toString();
                 setCurData(value);
+                setCustomData(examples[value]);
               }}
             >
               {Object.entries(examples).map((d, i) => (
-                <option value={d[0]} key={i}>
+                <option value={d[0]} key={i} className={styles.option}>
                   {d[0]}
                 </option>
               ))}
-              <option value="custom">Custom</option>
             </Form.Control>
           </Form.Group>
-          {curData === "custom" && (
+          {curData === "Custom" ? (
             <Button size="sm" onClick={() => setCustomDataInput(true)}>
               Load Data
+            </Button>
+          ) : (
+            <Button
+              size="sm"
+              onClick={() => {
+                setCustomDataInput(true);
+                setDataEdited(true);
+              }}
+            >
+              Edit Data
             </Button>
           )}
           <Form.Group
@@ -333,10 +345,17 @@ function Home() {
 
       <div className={styles.hierarchy}>
         <div className={styles.wrapper}>
-          {Object.keys(curData === "custom" ? customData : examples[curData])
-            .length ? (
+          {Object.keys(
+            curData === "custom" || isDataEdited
+              ? customData
+              : examples[curData]
+          ).length ? (
             <Hierarchy
-              data={curData === "custom" ? customData : examples[curData]}
+              data={
+                curData === "custom" || isDataEdited
+                  ? customData
+                  : examples[curData]
+              }
               config={config}
             />
           ) : (
